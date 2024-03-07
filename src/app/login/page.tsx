@@ -84,7 +84,7 @@ export default function Loginpage() {
 
                     <button onClick={Login} className="font-bold text-white  w-[270px] h-[40px] rounded-3xl bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 hover:scale-95">LOGIN</button>
                     <div className="flex">
-                        <p className="mb-[20px] text-gray-500 mr-[5px]">Don't have an accout?</p>
+                        <p className="mb-[20px] text-gray-500 mr-[5px]">Dont have an accout?</p>
                         <Link href="register" className="mb-[20px] hover:text-blue-700">Sign Up</Link>
                     </div>
                 </div>
@@ -95,12 +95,3 @@ export default function Loginpage() {
 }
 
 
-
-{/* <button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-[270px] h-[40px] rounded-full font-bold text-white hover:scale-95">LOGIN</button>
-<div className="flex">
-<h5 className="mb-6 text-gray-500">Don't have an account? </h5>
-<h5 className="mb-6 font-bold">Sign Up</h5>
-</div> */}
-
-{/* <h1 className="text-red-400">{email}</h1>
-    <h1 className="text-blue-400">{password}</h1> */}
