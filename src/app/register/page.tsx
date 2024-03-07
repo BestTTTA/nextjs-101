@@ -1,6 +1,4 @@
 "use client"
-
-// import { useEffect, useState } from "react";
 import Image from "next/image";
 import TextField from '@mui/material/TextField';
 import React from "react";
@@ -11,46 +9,63 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export default function Flex() {
+
+export default function Registerpage() {
+
     const [showPassword, setShowPassword] = React.useState(false);
-
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-  
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
+        event.preventDefault();
     };
-    // const [random, setRandom] = useState("");
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         GetRandomColor();
-    //     }, 1000);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    //     return () => clearInterval(interval);
-    // }, []);
+    const router = useRouter()
 
-    // const GetRandomColor = () => {
-    //     const randomColor = "#" + ((1 << 24) * Math.random() | 0).toString(16);
-    //     setRandom(randomColor);
-    // }
+    const Register = async () => {
+        try{
+        const responseRegister = await axios.post("https://4d65-2403-6200-8821-1051-413-3023-7a17-abba.ngrok-free.app/register/",
+            {
+                username: email,
+                password: password
+            },
+            )
+            console.log(responseRegister)
+
+            if(responseRegister.status === 200){
+                router.push("login")
+            }
+
+        }
+        catch (error) {
+            console.log("Error from func Resgister", error)
+        }
+    }
 
     return (
         <div className="flex justify-center items-center w-full h-screen bg-gray-200">
-            <div className="flex flex-col justify-evenly rounded-xl w-[450px] h-[620px] bg-white shadow-md">
+            <div className="flex flex-initial flex-col justify-evenly rounded-xl w-[450px] h-[620px] bg-white shadow-md mx-2">
 
                 <div className="flex justify-center items-center h-[100%]">
                     <div className="flex justify-center items-center flex-col gap-8">
-                        <h1 className="font-extrabold text-3xl">Welcome Best</h1>
-                        <Image className="hover:w-24 hover:h-24" alt="" src="next.svg" width={70} height={70} />
+                        <h1 className="font-extrabold text-3xl ">Welcome Best</h1>
+                        <Image className="hover:scale-110 hover:h-24" alt="" src="next.svg" width={70} height={70} />
                     </div>
                 </div>
 
                 <div className="h-[100%] flex flex-col gap-4 items-center">
-                    <TextField className="w-[270px]" id="standard-basic" label="Email" variant="standard" />
+                    <TextField className="w-[270px]" id="standard-basic" label="Email" variant="standard" value={email} onChange={(e) => setEmail(e.target.value)}
+                    />
                     <FormControl className="w-[270px]" sx={{ m: 1, width: '25ch' }} variant="standard">
                         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                         <Input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             id="standard-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
@@ -68,12 +83,13 @@ export default function Flex() {
                     </FormControl>
                 </div>
 
-                <div className="h-[100%] border-2 border-blue-500"></div>
+                <div className="h-[100%] flex flex-col items-center justify-between">
+
+                    <button onClick={Register} className="font-bold text-white  w-[270px] h-[40px] rounded-3xl bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 hover:scale-95">REGISTER</button>
+
+                </div>
+
             </div>
         </div>
     )
 }
-
-
-
-// md:w-[350px] md:h-[500px] lg:w-[500px] lg:h-[570px]
